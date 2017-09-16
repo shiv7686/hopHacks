@@ -16,21 +16,6 @@ function googleSignin() {
    });
 }
 
-function okay(){
-
-	firebase.auth().onAuthStateChanged(function(user) {
-		  if (user) {
-		    // User is signed in
-		    var theUrl = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + token;
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.open( "GET", theUrl, false );
-			xmlHttp.send( null );
-			return xmlHttp.responseText;
-		  } else {
-		    // No user is signed in.
-		  }
-		});
-}
 
 function googleSignout() {
    firebase.auth().signOut()
