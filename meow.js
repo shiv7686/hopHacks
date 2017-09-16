@@ -1,6 +1,10 @@
 var provider = new firebase.auth.GoogleAuthProvider();
 
 var user;
+var displayName;
+var email;
+var photoURL;
+var gender;
 
 function googleSignin() {
    firebase.auth()
@@ -9,9 +13,13 @@ function googleSignin() {
       var token = result.credential.accessToken;
       user = result.user;
 		
-      console.log("TOKEN " + token)
-      console.log("USER " + user)
-      console.log(user.displayName)
+      console.log("TOKEN " + token);
+      console.log("USER " + user);
+      displayName = (user.displayName());
+      email = (user.email());
+      photoURL = (user.photoURL());
+      console.log(email);
+      
    }).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
