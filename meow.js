@@ -18,7 +18,7 @@ function googleSignin() {
       displayName = (user.displayName);
       email = (user.email);
       photoURL = (user.photoURL);
-      console.log(displayName);
+      gender = (user.gender);
       
    }).catch(function(error) {
       var errorCode = error.code;
