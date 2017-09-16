@@ -25,3 +25,18 @@ function googleSignout() {
       console.log('Signout Failed')  
    });
 }
+
+function okay(){
+	if(user)
+	{
+		var theUrl = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + token;
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( "GET", theUrl, false );
+		xmlHttp.send( null );
+		return xmlHttp.responseText;
+	}
+	else
+	{
+		// do nothing
+	}
+}
