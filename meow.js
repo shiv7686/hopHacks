@@ -34,7 +34,7 @@ function googleSignout() {
 
 function facebookLogIn()
 {
-	firebase.auth().signInWithPopup(provider).then(function(result) {
+	firebase.auth().signInWithPopup(provider1).then(function(result) {
   // This gives you a Facebook Access Token. You can use it to access the Facebook API.
   var token = result.credential.accessToken;
   // The signed-in user info.
