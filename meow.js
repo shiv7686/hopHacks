@@ -9,6 +9,7 @@ function googleSignin() {
 		
       console.log("TOKEN " + token)
       console.log("USER " + user)
+      console.log(user.displayName);
    }).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
