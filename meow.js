@@ -9,7 +9,6 @@ function googleSignin() {
 		
       console.log("TOKEN " + token)
       console.log("USER " + user)
-      httpGet(token);
    }).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -27,11 +26,11 @@ function googleSignout() {
    });
 
 
-function httpGet(id)
+function httpGet()
 {
-	var url = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=";
+	var url = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + token;
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", url+id, false ); // false for synchronous request
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
     xmlHttp.send( null );
     return xmlHttp.responseText;
 }
