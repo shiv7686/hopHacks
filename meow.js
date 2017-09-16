@@ -24,4 +24,4 @@ function googleSignout() {
    }, function(error) {
       console.log('Signout Failed')  
    });
-
+}
