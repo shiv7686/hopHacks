@@ -16,16 +16,6 @@ function googleSignin() {
    });
 }
 
-function googleSignout() {
-   firebase.auth().signOut()
-	
-   .then(function() {
-      console.log('Signout Succesfull')
-   }, function(error) {
-      console.log('Signout Failed')  
-   });
-}
-
 function okay(){
 	if(user)
 	{
@@ -40,3 +30,14 @@ function okay(){
 		// do nothing
 	}
 }
+
+function googleSignout() {
+   firebase.auth().signOut()
+	
+   .then(function() {
+      console.log('Signout Succesfull')
+   }, function(error) {
+      console.log('Signout Failed')  
+   });
+}
+
