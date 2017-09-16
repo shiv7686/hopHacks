@@ -1,0 +1,17 @@
+{
+  "name": "hophacks",
+  "version": "1.0.0",
+  "description": "MVP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hameed Abdul",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.11",
+    "path": "^0.12.7"
+  }
+}
