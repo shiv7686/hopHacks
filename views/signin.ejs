@@ -1,0 +1,33 @@
+<% include  partials/header %>
+
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MEOW</title>
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+<script src="meow.js"></script>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDf8LFlXhjn5ey44bIXLfcEFH-RsojmftY",
+    authDomain: "hophacks-e7009.firebaseapp.com",
+    databaseURL: "https://hophacks-e7009.firebaseio.com",
+    projectId: "hophacks-e7009",
+    storageBucket: "hophacks-e7009.appspot.com",
+    messagingSenderId: "477199138391"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<button onclick = "googleSignin()">Google Signin</button>
+<button onclick = "googleSignout()">Google Signout</button>
+
+
+</body>
+</html>
+
+<% include  partials/footer %>
