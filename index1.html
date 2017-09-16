@@ -6,6 +6,9 @@
 </head>
 <body>
 <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+
+<script src="meow.js"></script>
+
 <script>
   // Initialize Firebase
   var config = {
@@ -18,8 +21,6 @@
   };
   firebase.initializeApp(config);
 </script>
-
-<script src="meow.js"></script>
 
 <button onclick = "googleSignin()">Google Signin</button>
 <button onclick = "googleSignout()">Google Signout</button>
