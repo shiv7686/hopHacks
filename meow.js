@@ -16,9 +16,9 @@ function googleSignin() {
       console.log("TOKEN " + token);
       console.log("USER " + user);
       displayName = (user.displayName);
-      email = (user.email());
-      photoURL = (user.photoURL());
-      console.log(displayName	);
+      email = (user.email);
+      photoURL = (user.photoURL);
+      console.log(displayName);
       
    }).catch(function(error) {
       var errorCode = error.code;
