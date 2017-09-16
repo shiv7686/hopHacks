@@ -28,7 +28,7 @@ function googleSignout() {
 
 function httpGet()
 {
-	var url = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + token;
+	var url = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+token;
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", url, false ); // false for synchronous request
     xmlHttp.send( null );
