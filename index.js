@@ -13,10 +13,6 @@ mongoose.connect('mongodb://localhost/mentor');
 // ####
 
 // models and Schema
-var mentor = new mongoose.Schema({
-    name : String,
-    age : Number
-});
 
 var user = new mongoose.Schema({
     name : String,
@@ -24,13 +20,20 @@ var user = new mongoose.Schema({
     }
 );
 
+var course = new mongoose.Schema(
+    {
+        name: String,
+        number: Number
+    }
+);
+
 var user = mongoose.model("User",user);
-var mentor = mongoose.model("mentor",mentor);
+var course = mongoose.model("course",course);
 // #####
 
 // Routes
 app.get("/", function(req,res){
-    res.render('signin');
+    res.render('signin', {cls:cls});
 });
 
 app.get("/coursesearch", function(req,res)
@@ -55,15 +58,22 @@ var tim = new user({
     age : 11
 });
 
-var ham = new mentor({
-    name : "Ham",
-    age : 524
+var cls = new course({
+    name: "History",
+    number : 101
 });
+
 
 tim.save( function(err,user){
     if(err)
         console.log(failed);
     else
         console.log(user.name);
-        console.log(mentor.name);
+});
+
+cls.save( function(err,cls){
+    if(err)
+        console.log(failed);
+    else
+        console.log(course.name);
 });
