@@ -1,27 +1,10 @@
-var express = require("express"),
-    app = express(),
-    mongoose = require("mongoose"),
-    bodyParser = require('body-parser');
-
-app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+var express = require('express');
+var router = express.Router();
+var mongoose = require("mongoose");
+//var user = require("/users.js");
+var app = express();
 
 var Schema = mongoose.Schema();
-
-// data bases
-mongoose.connect('mongodb://localhost/test');
-mongoose.connect('mongodb://localhost/mentor');
-// ####
-
-var db = mongoose.connection;
-db.on('error', function (err) {
-    console.log('connection error', err);
-});
-db.once('open', function () {
-    console.log('connected.');
-});
 
 // models and Schema
 var user = new mongoose.Schema({
@@ -38,20 +21,33 @@ var course = new mongoose.Schema({
 var user = mongoose.model("User", user);
 var course = mongoose.model("course", course);
 // #####
+var tim = new user();
 
-
-// Routes
-
-// index routes
-app.get("/", function (req, res) {
-    res.render('signin', {
-        cls: cls
-    });
+var cls = new course({
+    name: "History",
+    number: 101
 });
 
+tim.save(function (err, user) {
+    if (err)
+        console.log(failed);
+    else
+        console.log(tim.name);
+});
+// data bases
+
+mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/mentor');
 
 
-app.use(bodyParser.json());
+/// ######################
+app.get("/", function (req, res) {
+  res.render('signin', {
+      cls: cls
+  });
+  console.log("Test");
+});
+
 app.post("/", function (req, res) {
     
     var test = new user({
@@ -83,26 +79,7 @@ app.get("*", function (req, res) {
     res.send("SOMETHING WENT WRONG");
 });
 
-app.listen(3000);
-// #####
+/// ###################################
 
-var tim = new user();
-
-var cls = new course({
-    name: "History",
-    number: 101
-});
-
-tim.save(function (err, user) {
-    if (err)
-        console.log(failed);
-    else
-        console.log(user.name);
-});
-
-// cls.save( function(err,cls){
-//     if(err)
-//         console.log(failed);
-//     else
-//         console.log(course.name);
-// });
+module.exports = user;
+module.exports = router;
