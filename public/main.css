@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700');
+
+body {
+    font-family: "Roboto";
+}
+
+video {
+  max-width: 100%;
+  width: 320px;
+}
+
+#welcome {
+    text-align: center;
+    line-height: 22px;
+    background: #4fc3ea;
+}
+
+#enter {
+    text-decoration: none;
+    color: #fff;
+    background-color: #FF8585;
+    padding: 12.5px 28px;
+    margin-top: 20px;
+    letter-spacing: 3px;
+    font-weight: 550;
+    font-size: 120%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+}
+
+#welcome input[type="text"] {
+    width: 30%;
+    background-color: #fafafa;
+    border-width: 0px;
+    width: 140px;
+    height: 22px;
+}
+
+.enterName {
+    width: 60%;
+    margin: 0 auto;
+    line-height: 25px;
+}
+
+#welcomeWords {
+    width: 50%;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 10px;
+    padding: 15px 0;
+    color: white;
+}
+
+#welcomeWords h1 {
+    line-height: 30px;
+    letter-spacing: 33px;
+    color: white;
+    font-size: 650%;
+    font-weight: bold;
+    text-align: center;
+}
+
+#tagline {
+  font-style: italic;
+  font-size: 125%;
+  letter-spacing: 2.5px;
+  margin: 5px 0;
+}
