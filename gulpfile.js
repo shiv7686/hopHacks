@@ -7,6 +7,24 @@ var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 var pkg = require('./package.json');
 
+var bsConfig = require("gulp-bootstrap-configurator");
+
+// For CSS 
+gulp.task('make-bootstrap-css', function(){
+ return gulp.src("./config.json")
+   .pipe(bsConfig.css())
+   .pipe(gulp.dest("./assets"));
+   // It will create `bootstrap.css` in directory `assets`. 
+});
+
+// For JS 
+gulp.task('make-bootstrap-js', function(){
+ return gulp.src("./config.json")
+   .pipe(bsConfig.js())
+   .pipe(gulp.dest("./assets"));
+   // It will create `bootstrap.js` in directory `assets`. 
+});
+
 // Set the banner content
 var banner = ['/*!\n',
   ' * Start Bootstrap - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n',
@@ -118,3 +136,6 @@ gulp.task('dev', ['browserSync', 'sass', 'minify-css', 'minify-js'], function() 
   gulp.watch('*.html', browserSync.reload);
   gulp.watch('js/**/*.js', browserSync.reload);
 });
+
+
+module.exports = gulp;
