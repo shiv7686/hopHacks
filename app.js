@@ -53,7 +53,6 @@ tim.save(function (err, user) {
 mongoose.connect('mongodb://localhost/test');
 mongoose.connect('mongodb://localhost/mentor');
 
-
 /// ######################
 app.get("/", function (req, res) {
   res.render('signin', {
