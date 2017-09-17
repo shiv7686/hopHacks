@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Elder.ly</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="design.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://simplewebrtc.com/latest-v2.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+</head>
+
+<body>
+    <div class="vid-container">
+        <div class="video">
+            <video id="localVideo"></video>
+        </div>
+        <div class="video">
+            <div id="remoteVideos"></div>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <section class="suggestions">
+            <section class="suggs">
+            <h2>Not sure where to start?</h2>
+            <h3>Why not try...</h3>
+        </section>
+    </section>
+    <section id="main">
+        <section id="messages">
+        </section>
+        <footer>
+            <textarea id="m" placeholder="Say something..."></textarea><i class="material-icons" id="send">send</i>
+        </footer>
+    </section>
+</div>
+
+<script>
+    jQuery(function($){
+        var socket = io.connect('http://localhost:3000');
+    });
+    
+    $(function () {
+            var webrtc = new SimpleWebRTC({
+                // the id/element dom element that will hold "our" video
+                localVideoEl: "localVideo",
+                // the id/element dom element that will hold remote videos
+                remoteVideosEl: "remoteVideos",
+                // immediately ask for camera access
+                autoRequestMedia: true
+            });
+
+            var socket = io();
+            socket.on("connect", function () {
+                // call the server-side function 'adduser' and send one parameter (value of prompt)
+
+                if (name !== null) {
+                    socket.emit("adduser", name);
+                }
+            });
+            // webrtc.on("readyToCall", function () {
+            //     // you can name it anything
+            //     webrtc.joinRoom("test");
+            // });
+            socket.on("room", function (room) {
+                console.log("room " + room);
+                webrtc.on("readyToCall", function () {
+                    // you can name it anything
+                    webrtc.joinRoom("room " + room);
+                });
+            });
+
+            var emitMsg = function () {
+                console.log($("#m").val());
+                var msg = $("#m").val();
+                socket.emit("chat message", msg);
+
+                var newMessage = $("<article class='right'><div class='msg'><div class='tri'></div><div class='msg_inner'>" +
+                    msg +
+                    "</div></div ></article>"
+                );
+                $("#messages").append(newMessage);
+                $("#messages").scrollTop(document.getElementById("messages").scrollHeight);
+                $("#m").val("");
+                return false;
+            };
+
+            $("#send").on('click', function () {
+                emitMsg();
+            });
+
+            $("#m").keyup(function (event) {
+                if (event.which == 13) emitMsg();
+            });
+
+            socket.on("chat message", function (msg) {
+                var newMessage = $("<article><div class='msg'><div class='tri'></div><div class='msg_inner'>" +
+                    msg +
+                    "</div></div ></article>"
+                );
+                $("#messages").append(newMessage);
+                $("#messages").scrollTop(document.getElementById("messages").scrollHeight);
+            });
+        });
+
+    </script>
+</body>
+</html>
