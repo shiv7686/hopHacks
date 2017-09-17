@@ -7,6 +7,7 @@ var port = process.env.PORT || 3000;
 var mongoose = require("mongoose"),
 path = require("path"),
 bodyParser = require('body-parser'),
+db = require('mongodb').db,
 gulp = require("./gulpfile.js");
 
 var rooms = [];
@@ -33,7 +34,7 @@ app.set("view engine", "ejs");
 
 //app.use('/css', express.static(__dirname + '/css'));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -43,6 +44,7 @@ var Schema = mongoose.Schema();
 // models and Schema
 var user = new mongoose.Schema({
     name: String,
+    image: String,
     age: Number,
     password: String,
     mentor: Boolean,
@@ -74,7 +76,6 @@ app.get("/login", function (req, res) {
   res.render("login");
 });
 
-
 app.get("/login/new", function (req, res) {
   res.render("dashboard", {tim});
 });
@@ -86,7 +87,8 @@ app.post("/login", function (req, res, next) {
   let password = req.body.password;
   var test = new user({
       name: name,
-      password: password
+      password: password,
+      img : "/img/base.jpg"
   });
 
   tim = test;
@@ -97,27 +99,35 @@ app.post("/login", function (req, res, next) {
       else
           res.redirect("login");
   });
+
   // db.user.insert({name: tim.name, password:tim.password});
   console.log("Pushed to db, Welcome " + test.name);
   //res.send("Hello" + tim.name);
   //res.send(200);
 });
 
-app.get("/login/:id", function (req, res) {
+app.get("/login/:id", function (req, res,next) {
   user.findById(req.params.id, function (err, foundUser) {
     if (err)
-          console.log(err);
-          else
-          res.render("show", {
-            user: foundUser
-          });
-        });
+    console.log(err);
+    else
+      res.end();
+  });
 });
+
+app.get("/profile", function (req, res) {
+  res.render('profile');
+});
+
+app.get("/users", function (req, res) 
+{
+  res.render('users');
+});
+
 
 app.get("/connect", function (req, res) {
   res.render('meeting');
 });
-
 
 io.on("connection", function(socket) {
   // Handles chat messages to rooms
@@ -167,3 +177,5 @@ function findRoom() {
     }
   }
 }
+
+
