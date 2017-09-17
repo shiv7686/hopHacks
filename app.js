@@ -24,7 +24,9 @@ var Schema = mongoose.Schema();
 var user = new mongoose.Schema({
     name: String,
     age: Number,
-    password: String
+    password: String,
+    mentor : Boolean,
+    review : String
 });
 
 var course = new mongoose.Schema({
@@ -42,45 +44,64 @@ var cls = new course({
     number: 101
 });
 
-tim.save(function (err, user) {
-    if (err)
-        console.log(failed);
-    else
-        console.log(tim.name);
-});
 // data bases
-
-mongoose.connect('mongodb://localhost/test');
-mongoose.connect('mongodb://localhost/mentor');
+var promise = mongoose.connect('mongodb://localhost/test', {
+    useMongoClient : true,
+});
 
 /// ######################
 app.get("/", function (req, res) {
-  res.render('index', {
+    res.render('index', {
       cls: cls
-  });
-  console.log("Test");
+    });
+    console.log("Test");
 });
 
 
 app.get("/login", function(req,res)
 {
     res.render("login");
-    res.send("Hello"+ this.user.name);
 });
 
-app.post("/login", function (req, res) {
-    
-    var test = new user({
-        name : req.body.email,
-        password : req.body.password
-    });
+// Gets data and returns it to the database
+app.post("/login", function (req, res, next) {
 
+    let name = req.body.email;
+    let password = req.body.password;
+    var test = new user({
+        name : name,
+        password : password
+    });
+    
     tim = test;
+    
+    user.create(test,function (err, newlycreated) {
+        if (err)
+            console.log(err);
+        else
+            res.redirect("login");
+    });
     // db.user.insert({name: tim.name, password:tim.password});
     console.log("Pushed to db, Welcome " + test.name);
-    db.user.insert(tim);
-    res.send("Hello" + tim.name);
+    //res.send("Hello" + tim.name);
     //res.send(200);
+});
+
+app.get("/login/new", function(req,res)
+{
+    res.render("dashboard",{tim});
+    //next();
+});
+
+app.get("/login/:id", function(req,res)
+{
+    user.findById(req.params.id,function(err, foundUser)
+    {
+        if(err)
+            console.log(err);
+        else
+            res.render("show", {user:foundUser});
+    });
 });
 // Course search route
 app.get("/coursesearch", function (req, res) {

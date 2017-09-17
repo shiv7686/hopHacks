@@ -4471,3 +4471,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	-o-animation-name: scaleIn;
 	animation-name: scaleIn;
 }
+
+#imagesMain{
+    display: inline-block;
+    position:relative;
+    padding: 0;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 150px;
+    text-align:center;
+}
+#imagesMain img{
+    height: 400px;
+    width: 400px;
+    vertical-align: center;
+}
