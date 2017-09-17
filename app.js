@@ -55,13 +55,20 @@ mongoose.connect('mongodb://localhost/mentor');
 
 /// ######################
 app.get("/", function (req, res) {
-  res.render('signin', {
+  res.render('index', {
       cls: cls
   });
   console.log("Test");
 });
 
-app.post("/", function (req, res) {
+
+app.get("/login", function(req,res)
+{
+    res.render("login");
+    res.send("Hello"+ this.user.name);
+});
+
+app.post("/login", function (req, res) {
     
     var test = new user({
         name : req.body.email,
@@ -69,14 +76,11 @@ app.post("/", function (req, res) {
     });
 
     tim = test;
-   // db.user.insert({name: tim.name, password:tim.password});
+    // db.user.insert({name: tim.name, password:tim.password});
     console.log("Pushed to db, Welcome " + test.name);
+    db.user.insert(tim);
+    res.send("Hello" + tim.name);
     //res.send(200);
-});
-
-app.get("/dashboard", function(req,res)
-{
-    res.send("Hello"+ this.user.name);
 });
 // Course search route
 app.get("/coursesearch", function (req, res) {
