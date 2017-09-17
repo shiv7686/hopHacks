@@ -7,7 +7,6 @@ var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 var pkg = require('./package.json');
 
-
 var bsConfig = require("gulp-bootstrap-configurator");
 
 // For CSS 
